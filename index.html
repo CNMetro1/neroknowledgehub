@@ -7,7 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Ensuring pure black and white */
+        /* Setting up custom colors for the jugs for high contrast in B/W theme */
+        .color-purple { background-color: #8A2BE2; color: white; border: 1px solid black; }
+        .color-yellow { background-color: #FFD700; color: black; border: 1px solid black; }
+        .color-white { background-color: white; color: black; border: 1px solid black; }
+        .color-pink { background-color: #FF69B4; color: black; border: 1px solid black; }
+        .color-brown { background-color: #A0522D; color: white; border: 1px solid black; }
+        .color-black { background-color: black; color: white; border: 1px solid white; }
+        .color-silver { background-color: #E5E7EB; color: black; border: 1px solid black; }
+
+        /* Ensuring pure black and white for main elements */
         body {
             font-family: 'Inter', sans-serif;
             background-color: white;
@@ -387,7 +396,7 @@
                         </ul>
                     </li>
                     <li>
-                        **Create Vortex:** Raise the jug so the steamer is below the surface of the milk. Look for a <span class="font-bold italic">spinning motion</span> (the <span class="font-bold italic">vortex</span>) to incorporate the air. Stop the steamer when the milk reaches **the correct target temperature (60°C for Dairy, 50°C for Alternatives)**.
+                        **Create Vortex:** Raise the jug so the steamer is below the surface of the milk. Look for a <span class="font-bold italic">spinning motion</span> (the <span class="font-bold italic">vortex</span>) to incorporate the air. Stop the steamer when the milk reaches **the correct target temperature (60&deg;C for Dairy, 50&deg;C for Alternatives)**.
                     </li>
                     <li>
                         **Bang And Swirl:** Put the jug on the side and wait <span class="font-bold italic">4–6 seconds</span> for the larger bubbles to rise to the surface. <span class="font-bold italic">Tap 3–4 times</span> to burst any big bubbles. <span class="font-bold italic">Swirl the milk</span> to create a glossy, silky finish.
@@ -727,23 +736,79 @@
                 </svg>
             </button>
             <div id="content-10" class="accordion-content p-4 hidden space-y-4 text-sm">
-                <h2 class="font-bold text-xl mb-2">Milk Handling and Alternative Targets</h2>
+                <h2 class="font-bold text-xl mb-2">10. MILK GUIDE & ALLERGY PROTOCOL</h2>
                 
-                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Dairy Milk Storage and Usage</h3>
+                <!-- Allergy Protocol -->
+                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Allergy & Intolerance Safety Protocol</h3>
+                <p class="font-bold">
+                    Whenever a customer requests an alternative milk, you <span class="font-bold italic">must</span> ask if this is due to an allergy/intolerance or simply a preference.
+                </p>
+                <div class="border border-red-500 bg-red-100 p-3 rounded-md">
+                    <p class="text-sm font-semibold text-black">
+                        If the customer states it is due to an allergy or intolerance, you must advise them that due to the use of shared equipment such as <span class="font-extrabold">steam wands, blenders, and bench space</span>, we cannot guarantee an allergen-free environment, despite our cleaning and sanitisation procedures. There is always a risk of cross-contamination.
+                    </p>
+                </div>
+
+                <!-- Milk Types and Temperatures -->
+                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Milk Types & Target Temperatures</h3>
+                <p>
+                    We use **Whole, Semi-Skimmed, and Skimmed Dairy Milk**, alongside **Alpro Barista** alternatives (Oat, Soya, Coconut, and Almond). We also use a **Vegan Suitable Hot Chocolate Powder** and a **Soya-Based Luxury Chocolate Base**.
+                </p>
                 <ul class="list-disc list-inside ml-4 space-y-1">
-                    <li>Always store milk below <span class="font-bold italic">4°C (40°F)</span>.</li>
-                    <li>Do not steam milk more than <span class="font-bold italic">once</span>; discard any leftover milk from the jug after use to ensure quality and hygiene.</li>
-                    <li>Always follow <span class="font-bold italic">FIFO (First In First Out)</span> when stocking milk and using open cartons.</li>
+                    <li><span class="font-bold italic">Dairy Milk (Whole, Semi-Skimmed, Skimmed):</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
+                    <li><span class="font-bold italic">Milk Alternatives (Oat, Soya, Coconut, Almond):</span> Target Temperature is <span class="font-bold italic">50&deg;C</span> (lower heat prevents curdling/flavor change).</li>
+                    <li><span class="font-bold italic">Luxury Chocolate Base:</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
                 </ul>
 
-                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Non-Dairy Steaming Targets</h3>
+                <!-- Jug Guide -->
+                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Color-Coded Jug & Cross-Contamination Guide</h3>
                 <p>
-                    Non-dairy milks (e.g., Oat, Soy, Coconut) are highly sensitive to heat and require a lower target temperature to prevent curdling and maintain taste.
+                    To prevent cross-contamination and ensure quality, dedicated, color-coded jugs must be used for each product.
                 </p>
-                <ul class="list-disc list-inside ml-4 space-y-1 pt-2">
-                    <li><span class="font-bold italic">Target Temperature:</span> <span class="font-bold italic">50°C - 55°C (122°F - 130°F)</span>. Always stop steaming when the jug becomes warm but not hot to the touch.</li>
-                    <li><span class="font-bold italic">Foam Quality:</span> Aim for a slightly less aerated foam than dairy milk. Oat milk produces the most comparable microfoam.</li>
-                    <li><span class="font-bold italic">Cleaning:</span> Flush and wipe the steam wand immediately after every non-dairy milk use to prevent cross-contamination.</li>
+                <ul class="list-none ml-4 space-y-2">
+                    <li class="p-2 color-silver rounded-md"><span class="font-bold">Silver Jug (No Tags):</span> Dairy Milks (Whole, Semi, Skimmed).</li>
+                    <li class="p-2 color-purple rounded-md"><span class="font-bold">Purple Tag Jug:</span> Oat Milk.</li>
+                    <li class="p-2 color-yellow rounded-md"><span class="font-bold">Yellow Tag Jug:</span> Soya Milk.</li>
+                    <li class="p-2 color-white rounded-md"><span class="font-bold">White Tag Jug:</span> Coconut Milk.</li>
+                    <li class="p-2 color-pink rounded-md"><span class="font-bold">Pink Tag Jug:</span> Almond Milk.</li>
+                    <li class="p-2 color-brown rounded-md"><span class="font-bold">Brown Tag Jug:</span> Hot Chocolate Powder (when used with dairy milk).</li>
+                    <li class="p-2 color-black rounded-md"><span class="font-bold">Black Tag Jug:</span> Luxury Chocolate Base.</li>
+                </ul>
+                <p class="pt-2 italic">
+                    **Hot Chocolate Rule:** When making a Hot Chocolate with alternative milk (e.g., Oat Hot Chocolate), use the **appropriate color-coded jug** for that alternative milk. Rinse the jug thoroughly immediately after use. Our Hot Chocolate Powder is Vegan Suitable.
+                </p>
+
+                <!-- Specific Steaming Techniques -->
+                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">Specific Steaming Techniques & Tips</h3>
+                <div class="space-y-3 pt-2">
+                    <p class="font-bold">Dairy Milks (60&deg;C Target):</p>
+                    <ul class="list-disc list-inside ml-6 space-y-1">
+                        <li><span class="font-bold italic">Whole / Semi-Skimmed:</span> These foam well. Focus on a strong **vortex** after initial air injection (chirping) to create a glossy, stable microfoam (the 'wet paint' consistency).</li>
+                        <li><span class="font-bold italic">Skimmed:</span> Foams quickly but the foam is generally lighter and less stable. Inject air for a **shorter duration** and focus heavily on creating a smooth **vortex** for texture refinement.</li>
+                    </ul>
+
+                    <p class="font-bold pt-2">Milk Alternatives (50&deg;C Target):</p>
+                    <ul class="list-disc list-inside ml-6 space-y-1">
+                        <li><span class="font-bold italic">Oat (Alpro Barista):</span> The most forgiving alternative, producing a rich microfoam similar to dairy. **Monitor the temperature closely**, as it can heat rapidly.</li>
+                        <li><span class="font-bold italic">Soya (Alpro Barista):</span> Very temperature-sensitive; it **curdles easily** above 55&deg;C. Use **minimum air injection** and stop heating immediately at 50&deg;C to avoid 'burnt' or sour notes.</li>
+                        <li><span class="font-bold italic">Coconut / Almond (Alpro Barista):</span> These milks have a thinner consistency. Use **minimal air injection**. The resulting foam is light and dissipates quickly, so **serve immediately** for the best result.</li>
+                    </ul>
+
+                    <p class="font-bold pt-2">Luxury Chocolate Base (60&deg;C Target):</p>
+                    <ul class="list-disc list-inside ml-6 space-y-1">
+                        <li><span class="font-bold italic">Steaming & Noise:</span> Inject a **small amount of air** at the start to ensure mixing, then fully submerge the wand. Due to the thick consistency, steaming will be **significantly louder** than milks.</li>
+                        <li><span class="font-bold italic">Heating:</span> Submerge the steam wand to fully heat and mix the base until it reaches **60&deg;C**.</li>
+                    </ul>
+                </div>
+                
+                <!-- General Quality & Storage Rules -->
+                <h3 class="font-bold text-lg border-b border-black pb-1 pt-2">General Quality & Storage Rules</h3>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li>Do not steam milk more than <span class="font-bold italic">once</span>; discard any leftover milk from the jug after use.</li>
+                    <li>Always follow <span class="font-bold italic">FIFO (First In First Out)</span> when stocking and using open milk cartons.</li>
+                    <li>Always store milk below <span class="font-bold italic">4&deg;C (40&deg;F)</span>.</li>
+                    <li><span class="font-bold italic">Allergy Cleaning Protocol:</span> Use a **sanitising probe wipe** to thoroughly clean the steam wand **before** and **after** use with alternative milks to minimize cross-contamination risk.</li>
+                    <li>Remember the <span class="font-bold italic">Golden Rule</span>: Purge and wipe the steam wand immediately after every use, especially when switching between milk types.</li>
                 </ul>
             </div>
         </div>
@@ -793,6 +858,21 @@
                         } else {
                             content.classList.remove('hidden');
                             header.querySelector('svg').classList.add('rotate-180');
+
+                            // SCROLL LOGIC
+                            let itemToScroll;
+                            if (!isNested) {
+                                // Scroll the top-level accordion-item
+                                itemToScroll = header.closest('.accordion-item');
+                            } else {
+                                // Scroll the nested-accordion-item
+                                itemToScroll = header.closest('.nested-accordion-item');
+                            }
+
+                            if (itemToScroll) {
+                                // Use scrollIntoView to smoothly bring the section to the top of the viewport
+                                itemToScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
                         }
                     }
                 });
