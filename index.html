@@ -30,7 +30,6 @@
         .accordion-item {
             border: 1px solid black;
             margin-bottom: 8px; /* Maintain spacing */
-            border-radius: 4px; /* Added for consistency */
         }
         .accordion-header {
             background-color: black;
@@ -100,11 +99,6 @@
         .sticky-search {
              top: 94px; /* Adjusted based on header height (approx 94px) */
              z-index: 5;
-        }
-        /* Scroll offset for fixed headers - uses CSS instead of complex JS calculation */
-        /* Assuming Header (94px) + Search Bar (approx 56px) = ~150px */
-        .accordion-item, .nested-accordion-item, .search-preview {
-            scroll-margin-top: 150px; 
         }
     </style>
 </head>
@@ -734,146 +728,111 @@
                 </svg>
             </button>
             <div id="content-10" class="accordion-content p-4 hidden space-y-4 text-sm">
-                <h2 data-block-id="h2-10-1" class="font-bold text-xl mb-2">Milk Types, Temperatures & Jug Guide</h2>
+                <h2 data-block-id="h2-10-1" class="font-bold text-xl mb-2">10. MILK GUIDE & ALLERGY PROTOCOL</h2>
                 
-                <h3 data-block-id="h3-10-2" class="font-bold text-lg border-b border-black pb-1 pt-2">Milk Types & Target Temperatures</h3>
-                <p data-block-id="p-10-3">
+                <h3 data-block-id="h3-10-2" class="font-bold text-lg border-b border-black pb-1 pt-2">Allergy & Intolerance Safety Protocol</h3>
+                <p data-block-id="p-10-3" class="font-bold">
+                    Whenever a customer requests an alternative milk, you <span class="font-bold italic">must</span> ask if this is due to an allergy/intolerance or simply a preference.
+                </p>
+                <div data-block-id="div-10-4" class="border border-red-500 bg-red-100 p-3 rounded-md">
+                    <p class="text-sm font-semibold text-black">
+                        If the customer states it is due to an allergy or intolerance, you must advise them that due to the use of shared equipment such as <span class="font-extrabold">steam wands, blenders, and bench space</span>, we cannot guarantee an allergen-free environment, despite our cleaning and sanitisation procedures. There is always a risk of cross-contamination.
+                    </p>
+                </div>
+
+                <h3 data-block-id="h3-10-5" class="font-bold text-lg border-b border-black pb-1 pt-2">Milk Types & Target Temperatures</h3>
+                <p data-block-id="p-10-6">
                     We use **Whole, Semi-Skimmed, and Skimmed Dairy Milk**, alongside **Alpro Barista** alternatives (Oat, Soya, Coconut, and Almond). We also use a **Vegan Suitable Hot Chocolate Powder** and a **Soya-Based Luxury Chocolate Base**.
                 </p>
-                <ul data-block-id="ul-10-4" class="list-disc list-inside ml-4 space-y-1">
-                    <li data-block-id="ul-10-4-1"><span class="font-bold italic">Dairy Milk (Whole, Semi-Skimmed, Skimmed):</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
-                    <li data-block-id="ul-10-4-2"><span class="font-bold italic">Milk Alternatives (Oat, Soya, Coconut, Almond):</span> Target Temperature is <span class="font-bold italic">50&deg;C</span> (lower heat prevents curdling/flavor change).</li>
-                    <li data-block-id="ul-10-4-3"><span class="font-bold italic">Luxury Chocolate Base:</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
+                <ul data-block-id="ul-10-7" class="list-disc list-inside ml-4 space-y-1">
+                    <li data-block-id="ul-10-7-1"><span class="font-bold italic">Dairy Milk (Whole, Semi-Skimmed, Skimmed):</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
+                    <li data-block-id="ul-10-7-2"><span class="font-bold italic">Milk Alternatives (Oat, Soya, Coconut, Almond):</span> Target Temperature is <span class="font-bold italic">50&deg;C</span> (lower heat prevents curdling/flavor change).</li>
+                    <li data-block-id="ul-10-7-3"><span class="font-bold italic">Luxury Chocolate Base:</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
                 </ul>
 
-                <h3 data-block-id="h3-10-5" class="font-bold text-lg border-b border-black pb-1 pt-2">Color-Coded Jug Guide</h3>
-                <p data-block-id="p-10-6">
-                    To prevent cross-contamination and ensure quality, dedicated, color-coded jugs must be used for each product. 
+                <h3 data-block-id="h3-10-8" class="font-bold text-lg border-b border-black pb-1 pt-2">Color-Coded Jug & Cross-Contamination Guide</h3>
+                <p data-block-id="p-10-9">
+                    To prevent cross-contamination and ensure quality, dedicated, color-coded jugs must be used for each product.
                 </p>
-                <ul data-block-id="ul-10-7" class="list-none ml-4 space-y-2">
-                    <li data-block-id="li-10-7-1" class="p-2 color-silver rounded-md"><span class="font-bold">Silver Jug (No Tags):</span> Dairy Milks (Whole, Semi, Skimmed).</li>
-                    <li data-block-id="li-10-7-2" class="p-2 color-purple rounded-md"><span class="font-bold">Purple Tag Jug:</span> Oat Milk.</li>
-                    <li data-block-id="li-10-7-3" class="p-2 color-yellow rounded-md"><span class="font-bold">Yellow Tag Jug:</span> Soya Milk.</li>
-                    <li data-block-id="li-10-7-4" class="p-2 color-white rounded-md"><span class="font-bold">White Tag Jug:</span> Coconut Milk.</li>
-                    <li data-block-id="li-10-7-5" class="p-2 color-pink rounded-md"><span class="font-bold">Pink Tag Jug:</span> Almond Milk.</li>
-                    <li data-block-id="li-10-7-6" class="p-2 color-brown rounded-md"><span class="font-bold">Brown Tag Jug:</span> Hot Chocolate Powder (when used with dairy milk).</li>
-                    <li data-block-id="li-10-7-7" class="p-2 color-black rounded-md"><span class="font-bold">Black Tag Jug:</span> Luxury Chocolate Base.</li>
+                <ul data-block-id="ul-10-10" class="list-none ml-4 space-y-2">
+                    <li data-block-id="li-10-10-1" class="p-2 color-silver rounded-md"><span class="font-bold">Silver Jug (No Tags):</span> Dairy Milks (Whole, Semi, Skimmed).</li>
+                    <li data-block-id="li-10-10-2" class="p-2 color-purple rounded-md"><span class="font-bold">Purple Tag Jug:</span> Oat Milk.</li>
+                    <li data-block-id="li-10-10-3" class="p-2 color-yellow rounded-md"><span class="font-bold">Yellow Tag Jug:</span> Soya Milk.</li>
+                    <li data-block-id="li-10-10-4" class="p-2 color-white rounded-md"><span class="font-bold">White Tag Jug:</span> Coconut Milk.</li>
+                    <li data-block-id="li-10-10-5" class="p-2 color-pink rounded-md"><span class="font-bold">Pink Tag Jug:</span> Almond Milk.</li>
+                    <li data-block-id="li-10-10-6" class="p-2 color-brown rounded-md"><span class="font-bold">Brown Tag Jug:</span> Hot Chocolate Powder (when used with dairy milk).</li>
+                    <li data-block-id="li-10-10-7" class="p-2 color-black rounded-md"><span class="font-bold">Black Tag Jug:</span> Luxury Chocolate Base.</li>
                 </ul>
-                <p data-block-id="p-10-8" class="pt-2 italic">
-                    **Hot Chocolate Rule:** When making a Hot Chocolate with alternative milk (e.g., Oat Hot Chocolate), use the **appropriate color-coded jug** for that alternative milk.
+                <p data-block-id="p-10-11" class="pt-2 italic">
+                    **Hot Chocolate Rule:** When making a Hot Chocolate with alternative milk (e.g., Oat Hot Chocolate), use the **appropriate color-coded jug** for that alternative milk. Rinse the jug thoroughly immediately after use. Our Hot Chocolate Powder is Vegan Suitable.
                 </p>
 
-                <h3 data-block-id="h3-10-9" class="font-bold text-lg border-b border-black pb-1 pt-2">Steaming Techniques & Storage Rules</h3>
-                <ul data-block-id="ul-10-10" class="list-disc list-inside ml-4 space-y-1">
-                    <li data-block-id="ul-10-10-1">Do not steam milk more than <span class="font-bold italic">once</span>; discard any leftover milk from the jug after use.</li>
-                    <li data-block-id="ul-10-10-2">Always follow <span class="font-bold italic">FIFO (First In First Out)</span> when stocking and using open milk cartons.</li>
-                    <li data-block-id="ul-10-10-3">Always store milk below <span class="font-bold italic">4&deg;C (40&deg;F)</span>.</li>
-                    <li data-block-id="ul-10-10-4">Purge and wipe the steam wand immediately after every use.</li>
-                </ul>
+                <h3 data-block-id="h3-10-12" class="font-bold text-lg border-b border-black pb-1 pt-2">Specific Steaming Techniques & Tips</h3>
+                <div data-block-id="div-10-13" class="space-y-3 pt-2">
+                    <p data-block-id="p-10-14" class="font-bold">Dairy Milks (60&deg;C Target):</p>
+                    <ul data-block-id="ul-10-15" class="list-disc list-inside ml-6 space-y-1">
+                        <li data-block-id="ul-10-15-1"><span class="font-bold italic">Whole / Semi-Skimmed:</span> These foam well. Focus on a strong **vortex** after initial air injection (chirping) to create a glossy, stable microfoam (the 'wet paint' consistency).</li>
+                        <li data-block-id="ul-10-15-2"><span class="font-bold italic">Skimmed:</span> Foams quickly but the foam is generally lighter and less stable. Inject air for a **shorter duration** and focus heavily on creating a smooth **vortex** for texture refinement.</li>
+                    </ul>
 
-                <h3 data-block-id="h3-10-11" class="font-bold text-lg border-b border-black pb-1 pt-2">Allergy & Intolerance Safety Protocol (Essential Steps)</h3>
-                <p data-block-id="p-10-12">
-                    When a customer states their milk choice is due to an **allergy or severe intolerance**, follow these mandatory steps to minimize the risk of cross-contamination:
-                </p>
-                <ol data-block-id="ol-10-13" class="list-decimal list-inside ml-4 space-y-1">
-                    <li data-block-id="li-10-13-1">Ask the <span class="font-bold italic">Golden Question</span>: "Is this due to an allergy or intolerance, or is it just a preference?"</li>
-                    <li data-block-id="li-10-13-2">If they confirm an allergy: **Wash hands** and put on **fresh gloves**.</li>
-                    <li data-block-id="li-10-13-3">Use a <span class="font-bold italic">fresh, clean, color-coded jug</span> (from the list above).</li>
-                    <li data-block-id="li-10-13-4">Thoroughly clean and purge the steam wand using a <span class="font-bold italic">sanitising probe wipe</span> **before** making the drink.</li>
-                    <li data-block-id="li-10-13-5">Use a **fresh, unopened carton** of the alternative milk where possible.</li>
-                </ol>
-                <p data-block-id="p-10-14" class="pt-2 italic">
-                    **Note:** Full details on risk communication and all allergy protocols are available in **Section 12**.
-                </p>
+                    <p data-block-id="p-10-16" class="font-bold pt-2">Milk Alternatives (50&deg;C Target):</p>
+                    <ul data-block-id="ul-10-17" class="list-disc list-inside ml-6 space-y-1">
+                        <li data-block-id="ul-10-17-1"><span class="font-bold italic">Oat (Alpro Barista):</span> The most forgiving alternative, producing a rich microfoam similar to dairy. **Monitor the temperature closely**, as it can heat rapidly.</li>
+                        <li data-block-id="ul-10-17-2"><span class="font-bold italic">Soya (Alpro Barista):</span> Very temperature-sensitive; it **curdles easily** above 55&deg;C. Use **minimum air injection** and stop heating immediately at 50&deg;C to avoid 'burnt' or sour notes.</li>
+                        <li data-block-id="ul-10-17-3"><span class="font-bold italic">Coconut / Almond (Alpro Barista):</span> These milks have a thinner consistency. Use **minimal air injection**. The resulting foam is light and dissipates quickly, so **serve immediately** for the best result.</li>
+                    </ul>
+
+                    <p data-block-id="p-10-18" class="font-bold pt-2">Luxury Chocolate Base (60&deg;C Target):</p>
+                    <ul data-block-id="ul-10-19" class="list-disc list-inside ml-6 space-y-1">
+                        <li data-block-id="ul-10-19-1"><span class="font-bold italic">Steaming & Noise:</span> Inject a **small amount of air** at the start to ensure mixing, then fully submerge the wand. Due to the thick consistency, steaming will be **significantly louder** than milks.</li>
+                        <li data-block-id="ul-10-19-2"><span class="font-bold italic">Heating:</span> Submerge the steam wand to fully heat and mix the base until it reaches **60&deg;C**.</li>
+                    </ul>
+                </div>
+                
+                <h3 data-block-id="h3-10-20" class="font-bold text-lg border-b border-black pb-1 pt-2">General Quality & Storage Rules</h3>
+                <ul data-block-id="ul-10-21" class="list-disc list-inside ml-4 space-y-1">
+                    <li data-block-id="ul-10-21-1">Do not steam milk more than <span class="font-bold italic">once</span>; discard any leftover milk from the jug after use.</li>
+                    <li data-block-id="ul-10-21-2">Always follow <span class="font-bold italic">FIFO (First In First Out)</span> when stocking and using open milk cartons.</li>
+                    <li data-block-id="ul-10-21-3">Always store milk below <span class="font-bold italic">4&deg;C (40&deg;F)</span>.</li>
+                    <li data-block-id="ul-10-21-4"><span class="font-bold italic">Allergy Cleaning Protocol:</span> Use a **sanitising probe wipe** to thoroughly clean the steam wand **before** and **after** use with alternative milks to minimize cross-contamination risk.</li>
+                    <li data-block-id="ul-10-21-5">Remember the <span class="font-bold italic">Golden Rule</span>: Purge and wipe the steam wand immediately after every use, especially when switching between milk types.</li>
+                </ul>
             </div>
         </div>
 
         <div class="accordion-item overflow-hidden" data-target="content-11">
             <button class="accordion-header w-full flex justify-between items-center p-4 font-semibold text-lg transition duration-200" data-target="content-11">
-                <span>11. FOOD HANDLING & SAFETY</span>
+                <span>11. FOOD HANDLING</span>
                 <svg class="h-6 w-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
             <div id="content-11" class="accordion-content p-4 hidden space-y-4 text-sm">
-                <h2 data-block-id="h2-11-1" class="font-bold text-xl mb-2">Core Principles of Food Safety</h2>
-
-                <h3 data-block-id="h3-11-2" class="font-bold text-lg border-b border-black pb-1 pt-2">FIFO and Stock Rotation</h3>
+                <h2 data-block-id="h2-11-1" class="font-bold text-xl mb-2">11. FOOD HANDLING & SAFETY PROTOCOLS</h2>
+                <p data-block-id="p-11-2">
+                    [Content for Food Handling will be placed here.]
+                </p>
                 <p data-block-id="p-11-3">
-                    <span class="font-bold italic">FIFO (First In First Out)</span> is essential for maintaining product freshness and preventing waste.
+                    This section is currently unpopulated.
                 </p>
-                <ul data-block-id="ul-11-4" class="list-disc list-inside ml-4 space-y-1">
-                    <li>When putting new stock away, place items with the nearest expiry dates at the front.</li>
-                    <li>Always check the <span class="font-bold italic">Date Dots</span> on products (day opened) and compare against the use-by date.</li>
-                    <li>Expired or damaged stock must be removed immediately.</li>
-                </ul>
-
-                <h3 data-block-id="h3-11-5" class="font-bold text-lg border-b border-black pb-1 pt-2">Temperature Control (The Danger Zone)</h3>
-                <p data-block-id="p-11-6">
-                    Food must be stored, chilled, or heated correctly to prevent the growth of harmful bacteria.
-                </p>
-                <ul data-block-id="ul-11-7" class="list-disc list-inside ml-4 space-y-1">
-                    <li>The **Danger Zone** for bacterial growth is between <span class="font-bold italic">8&deg;C and 63&deg;C</span>.</li>
-                    <li>**Refrigerated food** must be stored at <span class="font-bold italic">4&deg;C or below</span>.</li>
-                    <li>**Freezer food** must be stored at <span class="font-bold italic">-18&deg;C or below</span>.</li>
-                    <li>**Hot Food** (e.g., items in the hot display) must be held above <span class="font-bold italic">63&deg;C</span>.</li>
-                </ul>
-
-                <h3 data-block-id="h3-11-8" class="font-bold text-lg border-b border-black pb-1 pt-2">Cross-Contamination Prevention</h3>
-                <p data-block-id="p-11-9">
-                    Separation is key to prevent bacteria from raw or soiled surfaces transferring to ready-to-eat food.
-                </p>
-                <ul data-block-id="ul-11-10" class="list-disc list-inside ml-4 space-y-1">
-                    <li>Use <span class="font-bold italic">dedicated coloured chopping boards and cloths</span> for different tasks (e.g., Blue for general cleaning, Red for raw meat/steam wand).</li>
-                    <li>Always wash hands thoroughly between tasks, especially after handling waste, cleaning, or touching raw/unpackaged ingredients.</li>
-                    <li>Store raw food (if applicable) below ready-to-eat food in the chiller.</li>
-                </ul>
             </div>
         </div>
-        
+
         <div class="accordion-item overflow-hidden" data-target="content-12">
             <button class="accordion-header w-full flex justify-between items-center p-4 font-semibold text-lg transition duration-200" data-target="content-12">
-                <span>12. ALLERGY AWARENESS & PROTOCOL</span>
+                <span>12. ALLERGY AWARENESS</span>
                 <svg class="h-6 w-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
             <div id="content-12" class="accordion-content p-4 hidden space-y-4 text-sm">
-                <h2 data-block-id="h2-12-1" class="font-bold text-xl mb-2">Allergy Protocol & Risk Communication</h2>
-
-                <h3 data-block-id="h3-12-2" class="font-bold text-lg border-b border-black pb-1 pt-2">The Golden Question</h3>
+                <h2 data-block-id="h2-12-1" class="font-bold text-xl mb-2">12. ALLERGY AWARENESS & CUSTOMER CARE</h2>
+                <p data-block-id="p-12-2">
+                    [Content for Allergy Awareness will be placed here.]
+                </p>
                 <p data-block-id="p-12-3">
-                    Whenever a customer requests an alternative milk or an allergen-free item, you <span class="font-bold italic">must</span> ask:
+                    This section is currently unpopulated.
                 </p>
-                <blockquote data-block-id="blockquote-12-4" class="italic p-3 bg-gray-100 border-l-4 border-black">
-                    "Is this due to an **allergy or intolerance**, or is it just a preference?"
-                </blockquote>
-
-                <h3 data-block-id="h3-12-5" class="font-bold text-lg border-b border-black pb-1 pt-2">Communicating the Risk</h3>
-                <p data-block-id="p-12-6">
-                    If the customer states it is due to an allergy/intolerance, you must clearly communicate the risk.
-                </p>
-                <div data-block-id="div-12-7" class="border border-red-500 bg-red-100 p-3 rounded-md">
-                    <p class="text-sm font-semibold text-black">
-                        "We cannot guarantee an allergen-free environment due to the use of shared equipment, such as **steam wands, blenders, and benches**. Despite our cleaning procedures, there is always a risk of <span class="font-extrabold">cross-contamination</span>."
-                    </p>
-                </div>
-                <ul data-block-id="ul-12-8" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                    <li>Always ask the customer if they are still happy to proceed after explaining the risk.</li>
-                    <li>If they are unsure, offer a pre-packaged item, as these are often safer.</li>
-                </ul>
-
-                <h3 data-block-id="h3-12-9" class="font-bold text-lg border-b border-black pb-1 pt-2">Allergy Mitigation Steps</h3>
-                <p data-block-id="p-12-10">
-                    If an allergy customer chooses to proceed, follow these steps to minimize risk (also outlined in Section 10):
-                </p>
-                <ol data-block-id="ol-12-11" class="list-decimal list-inside ml-4 space-y-1">
-                    <li data-block-id="li-12-11-1">Wash hands and put on fresh gloves.</li>
-                    <li data-block-id="li-12-11-2">Use a <span class="font-bold italic">fresh, clean, color-coded jug</span>.</li>
-                    <li data-block-id="li-12-11-3">Thoroughly clean and purge the steam wand using a <span class="font-bold italic">sanitising probe wipe</span> **before** making the drink.</li>
-                    <li data-block-id="li-12-11-4">Clean the immediate preparation area/bench surface before preparing.</li>
-                    <li data-block-id="li-12-11-5">Use pre-packaged milk cartons where possible, and open a **fresh carton** to guarantee no contamination from a spout/jug.</li>
-                </ol>
             </div>
         </div>
 
@@ -887,25 +846,33 @@
         const mainContent = document.getElementById('knowledge-hub');
         const allItems = mainContent.querySelectorAll('.accordion-item');
         
-        // The scroll offset is now handled by the CSS 'scroll-margin-top: 150px;' property on the scroll targets.
-        // We no longer need to calculate the offset in JS.
+        // Cache header and search bar heights for scroll calculations
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const searchBarContainer = document.querySelector('.sticky-search');
+        const searchBarHeight = searchBarContainer ? searchBarContainer.offsetHeight : 0;
+        const scrollOffset = headerHeight + searchBarHeight + 20; // Total sticky height + padding
 
         // --- NEW CLEAR BUTTON LOGIC ---
 
         /**
          * Clears the search input and results display, then re-runs the search to hide the button.
+         * This function is called by the onclick attribute on the 'x' button.
          */
         function clearSearchAndResults() {
             // 1. Clear the input field's value
             searchInput.value = ''; 
             
-            // 2. Force trigger the search logic (this will handle the button visibility and reset results)
-            performSearchLogic(); 
-
-            // 3. Make sure main content is visible after clearing search
-            mainContent.style.display = 'block'; 
+            // 2. Hide the clear button (optional, but good practice before search runs)
+            clearButton.style.display = 'none'; 
             
-            // 4. (Optional) Put the focus back on the input for immediate typing
+            // 3. Reset the search results display area
+            searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">Start typing to search the hub.</p>`;
+            
+            // 4. Force trigger the search logic to ensure the button is hidden and search state is clean
+            // Since the original search logic is attached to 'input' event, we can call it manually.
+            performSearchLogic();
+
+            // 5. (Optional) Put the focus back on the input for immediate typing
             searchInput.focus(); 
         }
 
@@ -931,12 +898,9 @@
             
             if (query.length < 3) {
                 searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">${query.length > 0 ? 'Keep typing for results...' : 'Start typing to search the hub.'}</p>`;
-                mainContent.style.display = 'block'; // Show main content when search is inactive/too short
                 return;
             }
 
-            mainContent.style.display = 'none'; // Hide main content when search is active
-            
             let resultsHtml = '';
 
             allItems.forEach(item => {
@@ -963,11 +927,11 @@
                 addPreviewListeners(); // Attach click listeners to new results
             } else {
                 searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">No matches found for "${query}".</p>`;
-                mainContent.style.display = 'block'; // Show content again if search yields nothing
             }
         }
 
         // --- Accordion Functionality (Retained for manual clicks) ---
+        // (Functionality remains largely the same, but search is now in its own function)
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         
         accordionHeaders.forEach(header => {
@@ -976,7 +940,8 @@
                 const content = document.getElementById(targetId);
                 const isNested = header.classList.contains('nested-accordion-header');
 
-                // Stop propagation for nested headers to prevent the main accordion item from closing
+                // FIX: Stop propagation for nested headers to prevent the main accordion item from closing
+                // No need to fix here since there are no nested items in 11 and 12 yet, but good to keep.
                 if (isNested) {
                     event.stopPropagation();
                 }
@@ -1013,13 +978,17 @@
                         content.classList.remove('hidden');
                         header.querySelector('svg').classList.add('rotate-180');
 
-                        // SCROLL LOGIC (Simplified with scrollIntoView and CSS scroll-margin-top)
+                        // SCROLL LOGIC
                         const itemToScroll = isNested ? header.closest('.nested-accordion-item') : header.closest('.accordion-item');
 
                         if (itemToScroll) {
-                            itemToScroll.scrollIntoView({
+                            // FIX: Use the calculated offset for scroll
+                            const elementPosition = itemToScroll.getBoundingClientRect().top + window.scrollY;
+                            const offsetPosition = elementPosition - scrollOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition > 0 ? offsetPosition : 0,
                                 behavior: 'smooth',
-                                block: 'start' // Scrolls the top of the element to the start of the viewport
                             });
                         }
                     }
@@ -1039,76 +1008,52 @@
             return `${parentTitle.split('. ')[1] || parentTitle} > ${nestedTitle}`;
         }
 
-        // Function to get the block's most relevant sub-heading (Updated for robustness)
+        // Function to get the block's most relevant sub-heading
         function getBlockSubTitle(block, nestedItem = null) {
             let current = block;
             
-            // Search backwards for the nearest preceding H3 or a recipe title P
-            // within the bounds of the current content section.
+            // Search upwards for the nearest preceding H3/P with font-semibold/LI with font-semibold
             const contentBoundary = current.closest('.accordion-content') || current.closest('.nested-accordion-item');
             
-            let precedingElement = current;
-            let foundTitle = null;
-
-            // Use a while loop to step backward through siblings until the boundary or a title is found
-            // This is a more comprehensive backward search than just previousElementSibling
-            while (precedingElement && precedingElement !== contentBoundary) {
-                if (precedingElement.previousElementSibling) {
-                    precedingElement = precedingElement.previousElementSibling;
-                } else {
-                    // If no previous sibling, move up to the parent and then check its previous sibling
-                    precedingElement = precedingElement.parentElement;
-                    if (precedingElement && precedingElement !== contentBoundary && precedingElement.previousElementSibling) {
-                        precedingElement = precedingElement.previousElementSibling;
-                    } else {
-                        break; // Stop if we hit the boundary or can't move backward
+            while (current && current !== contentBoundary) {
+                if (current.previousElementSibling) {
+                    const prev = current.previousElementSibling;
+                    // Check for H3 or a P/LI with the font-semibold class (used for recipe/step titles)
+                    if (prev.tagName === 'H3' || (prev.tagName === 'P' && prev.classList.contains('font-semibold')) || (prev.tagName === 'LI' && prev.classList.contains('font-semibold'))) {
+                        // If it's a list item that is font-semibold, it's often a good title
+                        if (prev.tagName === 'LI' && prev.classList.contains('font-semibold')) {
+                            return prev.textContent.trim().substring(0, 100);
+                        }
+                        // Else return the H3 or P title
+                        return prev.textContent.trim().substring(0, 100);
                     }
                 }
                 
-                // Check if the current preceding element is a suitable title
-                if (precedingElement) {
-                    // H3 is always a strong title
-                    if (precedingElement.tagName === 'H3') {
-                        foundTitle = precedingElement.textContent.trim();
-                        break;
-                    }
-                    // A P with 'font-semibold' class is used for recipe/step titles
-                    if (precedingElement.tagName === 'P' && precedingElement.classList.contains('font-semibold') && precedingElement.textContent.trim().length > 0) {
-                        // Check if it's the recipe/step title and not just a paragraph containing a list
-                        if (!precedingElement.querySelector('ul, ol')) {
-                            foundTitle = precedingElement.textContent.trim();
-                            break;
+                // FIX: Check if the current element itself is a list item inside an OL/UL, and look up to the list parent's preceding element.
+                if (current.tagName === 'LI' && current.parentElement) {
+                    // Look up to the list itself
+                    let listParent = current.parentElement;
+                    let lookUp = listParent;
+                    // Check list parent's previous element
+                    if(listParent.previousElementSibling) {
+                        const prev = listParent.previousElementSibling;
+                         if (prev.tagName === 'H3' || (prev.tagName === 'P' && prev.classList.contains('font-semibold'))) {
+                            return prev.textContent.trim().substring(0, 100);
                         }
                     }
-                    // If the block is nested in a list (UL/OL), we need to look at what precedes the list itself
-                    if (precedingElement.tagName === 'UL' || precedingElement.tagName === 'OL') {
-                        let listPrev = precedingElement.previousElementSibling;
-                        while (listPrev && listPrev !== contentBoundary) {
-                             if (listPrev.tagName === 'H3' || (listPrev.tagName === 'P' && listPrev.classList.contains('font-semibold'))) {
-                                foundTitle = listPrev.textContent.trim();
-                                break;
-                            }
-                            listPrev = listPrev.previousElementSibling;
-                        }
-                        if (foundTitle) break;
-                    }
                 }
-            }
-            
-            // Fallback 1: If no preceding H3/P was found, try the block itself (if it's a title block)
-            if (!foundTitle) {
-                if (block.tagName === 'H3' || block.tagName === 'H2' || (block.tagName === 'P' && block.classList.contains('font-semibold'))) {
-                    foundTitle = block.textContent.trim();
-                }
+
+                // Move up to the parent element for the next iteration
+                current = current.parentElement; 
             }
 
-            // Final fallback: just the first part of the block's text
-            if (!foundTitle) {
-                return block.textContent.trim().substring(0, 50) + '...';
+            // Fallback 1: If the block itself is a main heading/title, use its content
+            if (block.tagName === 'H3' || block.tagName === 'H2' || (block.tagName === 'P' && block.classList.contains('font-semibold'))) {
+                return block.textContent.trim().substring(0, 100);
             }
             
-            // Truncate the title to keep the preview neat
-            return foundTitle.substring(0, 100);
+            // Fallback 2: Grab a snippet from the content block's text
+            return block.textContent.trim().substring(0, 50) + '...';
         }
 
         // Function to generate a clickable HTML preview snippet
@@ -1119,6 +1064,7 @@
             if (!searchableContainer) return '';
 
             // Find all distinct content blocks with data-block-id inside the searchable container
+            // FIX: Also look inside nested UL/OLs
             const contentBlocks = searchableContainer.querySelectorAll('[data-block-id]');
             
             let resultsHtml = '';
@@ -1141,7 +1087,7 @@
                 let previewText = '';
                 let firstMatchFound = false;
 
-                // Find first match for context
+                // Find first match for context (exec automatically starts searching from the beginning)
                 while ((match = regex.exec(textContent)) !== null) {
                     if (!firstMatchFound) {
                         const before = match[1].trim();
@@ -1232,13 +1178,17 @@
                         }
                     }
 
-                    // 4. Scroll the specific content block into view (using CSS scroll-margin-top for offset)
+                    // 4. Scroll the specific content block into view
                     if (blockId) {
                         const targetBlock = document.querySelector(`[data-block-id="${blockId}"]`);
                         if (targetBlock) {
-                            targetBlock.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
+                            // FIX: Use the pre-calculated offset
+                            const elementPosition = targetBlock.getBoundingClientRect().top + window.scrollY;
+                            const offsetPosition = elementPosition - scrollOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition > 0 ? offsetPosition : 0, // Prevent negative scroll
+                                behavior: 'smooth'
                             });
                             
                             // Optional: Flash the block briefly for visual confirmation
