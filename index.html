@@ -30,6 +30,7 @@
         .accordion-item {
             border: 1px solid black;
             margin-bottom: 8px; /* Maintain spacing */
+            border-radius: 4px; /* Added for consistency */
         }
         .accordion-header {
             background-color: black;
@@ -55,25 +56,55 @@
             overflow: hidden;
             display: block; /* Default display for search visibility */
         }
+        /* Style for the search input container to enable relative positioning */
+        .search-wrapper {
+            position: relative; /* Essential for positioning the clear button */
+            width: 100%;
+        }
         /* Style for the search input */
         #search-input {
             width: 100%;
-            padding: 10px;
+            padding: 10px 40px 10px 10px; /* Increased right padding for the 'x' button */
             border: 2px solid black;
             border-radius: 4px;
             font-size: 1rem;
             color: black;
             background-color: white;
             transition: border-color 0.2s;
+            box-sizing: border-box;
         }
         #search-input:focus {
             outline: none;
             border-color: #555; /* Slightly darker border on focus */
         }
+        /* Style for the clear button */
+        #clear-search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 2px 5px;
+            line-height: 1;
+            /* Initially hidden - will be controlled by JavaScript */
+            display: none;
+            user-select: none;
+        }
+        #clear-search-btn:hover {
+            color: #000;
+        }
         /* Custom style for sticky top offset */
         .sticky-search {
              top: 94px; /* Adjusted based on header height (approx 94px) */
              z-index: 5;
+        }
+        /* Scroll offset for fixed headers - uses CSS instead of complex JS calculation */
+        /* Assuming Header (94px) + Search Bar (approx 56px) = ~150px */
+        .accordion-item, .nested-accordion-item, .search-preview {
+            scroll-margin-top: 150px; 
         }
     </style>
 </head>
@@ -89,7 +120,10 @@
     </header>
 
     <div class="max-w-4xl mx-auto p-4 pt-6 pb-2 sticky sticky-search bg-white">
-        <input type="text" id="search-input" placeholder="Search for 'Latte', '21 seconds', or 'FIFO'...">
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Search for 'Latte', '21 seconds', or 'FIFO'...">
+            <span id="clear-search-btn" class="text-gray-500 hover:text-black transition-colors" onclick="clearSearchAndResults()">x</span>
+        </div>
     </div>
 
     <div id="search-results" class="max-w-4xl mx-auto p-4 pt-0 space-y-3">
@@ -97,7 +131,6 @@
     </div>
 
     <main id="knowledge-hub" class="max-w-4xl mx-auto p-4 pt-0 space-y-4">
-
         <div class="accordion-item overflow-hidden" data-target="content-1">
             <button class="accordion-header w-full flex justify-between items-center p-4 font-semibold text-lg transition duration-200" data-target="content-1">
                 <span>1. BRILLIANT AT THE BASICS</span>
@@ -360,14 +393,14 @@
             <div id="content-7" class="accordion-content p-4 hidden space-y-4 text-sm">
                 <h2 data-block-id="h2-7-1" class="font-bold text-xl mb-2">8 Steps for Preparing the Handle</h2>
                 <ol data-block-id="ol-7-2" class="list-decimal list-inside ml-4 space-y-3">
-                    <li>Remove the handle (portafilter) and press <span class="font-bold italic">button 3 to flush</span> the group head.</li>
-                    <li>Empty the handle on the <span class="font-bold italic">knock out bar</span>.</li>
-                    <li>Place the handle on the holder of the grinder. Press the coffee dispenser button with the handle <span class="font-bold italic">once</span>.</li>
-                    <li>Do not remove the handle until the <span class="font-bold italic">grinder stops</span> dispensing.</li>
-                    <li>Gently <span class="font-bold italic">level the coffee ground</span> with the palm of your hand.</li>
-                    <li>Place the handle onto the handle rest of the tamper and <span class="font-bold italic">pull down until you hear a click</span>.</li>
-                    <li><span class="font-bold italic">Wipe the handle</span> rim clean.</li>
-                    <li>Insert the handle into the group head and press <span class="font-bold italic">button 2 or 4</span> depending on whether you are pulling an <span class="font-bold italic">Espresso/Ristretto</span> or a <span class="font-bold italic">"Coffee shot"</span>.</li>
+                    <li data-block-id="li-7-2-1">Remove the handle (portafilter) and press <span class="font-bold italic">button 3 to flush</span> the group head.</li>
+                    <li data-block-id="li-7-2-2">Empty the handle on the <span class="font-bold italic">knock out bar</span>.</li>
+                    <li data-block-id="li-7-2-3">Place the handle on the holder of the grinder. Press the coffee dispenser button with the handle <span class="font-bold italic">once</span>.</li>
+                    <li data-block-id="li-7-2-4">Do not remove the handle until the <span class="font-bold italic">grinder stops</span> dispensing.</li>
+                    <li data-block-id="li-7-2-5">Gently <span class="font-bold italic">level the coffee ground</span> with the palm of your hand.</li>
+                    <li data-block-id="li-7-2-6">Place the handle onto the handle rest of the tamper and <span class="font-bold italic">pull down until you hear a click</span>.</li>
+                    <li data-block-id="li-7-2-7"><span class="font-bold italic">Wipe the handle</span> rim clean.</li>
+                    <li data-block-id="li-7-2-8">Insert the handle into the group head and press <span class="font-bold italic">button 2 or 4</span> depending on whether you are pulling an <span class="font-bold italic">Espresso/Ristretto</span> or a <span class="font-bold italic">"Coffee shot"</span>.</li>
                 </ol>
             </div>
         </div>
@@ -377,26 +410,25 @@
                 <span>8. MILK STEAMING</span>
                 <svg class="h-6 w-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
             <div id="content-8" class="accordion-content p-4 hidden space-y-4 text-sm">
                 <h2 data-block-id="h2-8-1" class="font-bold text-xl mb-2">The 4 Steps of Milk Steaming</h2>
                 <ol data-block-id="ol-8-2" class="list-decimal list-inside ml-4 space-y-3">
-                    <li>
+                    <li data-block-id="li-8-2-1">
                         **Position Steam Wand:** Place the steam wand just <span class="font-bold italic">below the surface</span> of the milk, to the side of the jug. The steamer should never touch the bottom of the jug. <span class="font-bold italic">Activate the steamer.</span>
                     </li>
-                    <li>
+                    <li data-block-id="li-8-2-2">
                         **Inject Air:** Lower the jug slightly so the steamer is <span class="font-bold italic">level with the milk surface</span>. You should hear a <span class="font-bold italic">chirping sound</span> when injecting air.
-                        <ul data-block-id="ul-8-3" class="list-disc list-inside ml-4 mt-1">
+                        <ul data-block-id="ul-8-2-3" class="list-disc list-inside ml-4 mt-1">
                             <li>Inject air up to <span class="font-bold italic">30 degrees</span> when steaming <span class="font-bold italic">Latte style</span>.</li>
                             <li>Inject air up to <span class="font-bold italic">40 degrees</span> when steaming <span class="font-bold italic">Cappuccino style</span>.</li>
                         </ul>
                     </li>
-                    <li>
+                    <li data-block-id="li-8-2-4">
                         **Create Vortex:** Raise the jug so the steamer is below the surface of the milk. Look for a <span class="font-bold italic">spinning motion</span> (the <span class="font-bold italic">vortex</span>) to incorporate the air. Stop the steamer when the milk reaches **the correct target temperature (60&deg;C for Dairy, 50&deg;C for Alternatives)**.
                     </li>
-                    <li>
+                    <li data-block-id="li-8-2-5">
                         **Bang And Swirl:** Put the jug on the side and wait <span class="font-bold italic">4–6 seconds</span> for the larger bubbles to rise to the surface. <span class="font-bold italic">Tap 3–4 times</span> to burst any big bubbles. <span class="font-bold italic">Swirl the milk</span> to create a glossy, silky finish.
                     </li>
                 </ol>
@@ -424,666 +456,30 @@
 
                         <p data-block-id="hot-espresso-p-1" class="font-semibold mt-2">ESPRESSO</p>
                         <ul data-block-id="hot-espresso-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">Prepare the handle.</span></li>
-                            <li>Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer.</li>
-                            <li>Correct rate of pour is <span class="font-bold italic">21 seconds +/- 1 second</span>.</li>
-                            <li>Serve in single or double espresso cups.</li>
+                            <li data-block-id="hot-espresso-li-1-1"><span class="font-bold italic">Prepare the handle.</span></li>
+                            <li data-block-id="hot-espresso-li-1-2">Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer.</li>
+                            <li data-block-id="hot-espresso-li-1-3">Correct rate of pour is <span class="font-bold italic">21 seconds +/- 1 second</span>.</li>
+                            <li data-block-id="hot-espresso-li-1-4">Serve in single or double espresso cups.</li>
                         </ul>
 
                         <p data-block-id="hot-ristretto-p-1" class="font-semibold mt-4">ESPRESSO RISTRETTO</p>
                         <ul data-block-id="hot-ristretto-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">Prepare the handle and tamp twice.</span></li>
-                            <li>Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer.</li>
-                            <li>Press stop when the timer hits <span class="font-bold italic">15 seconds</span>.</li>
-                            <li>Serve in single or double espresso cups.</li>
+                            <li data-block-id="hot-ristretto-li-1-1"><span class="font-bold italic">Prepare the handle and tamp twice.</span></li>
+                            <li data-block-id="hot-ristretto-li-1-2">Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer.</li>
+                            <li data-block-id="hot-ristretto-li-1-3">Press stop when the timer hits <span class="font-bold italic">15 seconds</span>.</li>
+                            <li data-block-id="hot-ristretto-li-1-4">Serve in single or double espresso cups.</li>
                         </ul>
 
                         <p data-block-id="hot-macchiato-p-1" class="font-semibold mt-4">ESPRESSO MACCHIATO</p>
                         <ul data-block-id="hot-macchiato-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">Prepare the handle.</span></li>
-                            <li>Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer (21 seconds +/- 1 second).</li>
-                            <li>Steam the milk in <span class="font-bold italic">Cappuccino style</span>.</li>
-                            <li><span class="font-bold italic">Single Macchiato:</span> A dash of milk and <span class="font-bold italic">1 spoon of foam</span>.</li>
-                            <li><span class="font-bold italic">Double Macchiato:</span> A dash of milk and <span class="font-bold italic">2 spoons of foam</span>.</li>
-                            <li>Serve in single or double espresso cups.</li>
+                            <li data-block-id="hot-macchiato-li-1-1"><span class="font-bold italic">Prepare the handle.</span></li>
+                            <li data-block-id="hot-macchiato-li-1-2">Extract the espresso (<span class="font-bold italic">button 2</span>) with a timer (21 seconds +/- 1 second).</li>
+                            <li data-block-id="hot-macchiato-li-1-3">Steam the milk in <span class="font-bold italic">Cappuccino style</span>.</li>
+                            <li data-block-id="hot-macchiato-li-1-4"><span class="font-bold italic">Single Macchiato:</span> A dash of milk and <span class="font-bold italic">1 spoon of foam</span>.</li>
+                            <li data-block-id="hot-macchiato-li-1-5"><span class="font-bold italic">Double Macchiato:</span> A dash of milk and <span class="font-bold italic">2 spoons of foam</span>.</li>
+                            <li data-block-id="hot-macchiato-li-1-6">Serve in single or double espresso cups.</li>
                         </ul>
 
                         <p data-block-id="hot-panna-p-1" class="font-semibold mt-4">ESPRESSO CON PANNA</p>
                         <ul data-block-id="hot-panna-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare a <span class="font-bold italic">Double Espresso, Button 2</span>.</li>
-                            <li>Add <span class="font-bold italic">whipped cream</span>.</li>
-                            <li>Serve in double espresso cup.</li>
-                        </ul>
-
-                        <p data-block-id="hot-cortado-p-1" class="font-semibold mt-4">CORTADO</p>
-                        <ul data-block-id="hot-cortado-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the espresso (<span class="font-bold italic">Single Espresso, Button 2</span>).</li>
-                            <li>Steam the whole milk <span class="font-bold italic">Latte style</span> but stop injecting air at <span class="font-bold italic">20 degrees</span>.</li>
-                            <li>Pour from the spout into a cortado glass. Foam: <span class="font-bold italic">0.5–1cm</span>.</li>
-                        </ul>
-
-                        <p data-block-id="hot-flatwhite-p-1" class="font-semibold mt-4">FLAT WHITE</p>
-                        <ul data-block-id="hot-flatwhite-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the <span class="font-bold italic">Espresso Ristretto (Button 2 and 15 seconds)</span>.</li>
-                            <li>Steam whole milk <span class="font-bold italic">Latte style</span>. Stop injecting air at <span class="font-bold italic">20 degrees</span>.</li>
-                            <li>Pour from the spout. Foam: <span class="font-bold italic">0.5–1cm</span>.</li>
-                        </ul>
-
-                        <p data-block-id="hot-latte-p-1" class="font-semibold mt-4">LATTE</p>
-                        <ul data-block-id="hot-latte-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the espresso (<span class="font-bold italic">Button 4</span>).
-                                <ul data-block-id="hot-latte-ul-2">
-                                    <li>Regular/Grande - <span class="font-bold italic">2 shots</span></li>
-                                </ul>
-                            </li>
-                            <li>Steam the milk in <span class="font-bold italic">Latte style</span>. Pour from the spout of the jug. Foam: <span class="font-bold italic">1–1.5cm</span>.</li>
-                        </ul>
-
-                        <p data-block-id="hot-cappuccino-p-1" class="font-semibold mt-4">CAPPUCCINO</p>
-                        <ul data-block-id="hot-cappuccino-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the espresso (<span class="font-bold italic">Button 4</span>).
-                                <ul data-block-id="hot-cappuccino-ul-2">
-                                    <li>Regular/Grande - <span class="font-bold italic">2 shots</span></li>
-                                </ul>
-                            </li>
-                            <li>Steam the milk <span class="font-bold italic">Cappuccino style</span>. Pour from the side of the jug until you have a <span class="font-bold italic">dome</span>.</li>
-                            <li>Foam: <span class="font-bold italic">2–2.5cm</span>. Add <span class="font-bold italic">chocolate powder</span> if requested.</li>
-                        </ul>
-
-                        <p data-block-id="hot-mocha-cream-p-1" class="font-semibold mt-4">MOCHA (WITH CREAM)</p>
-                        <ul data-block-id="hot-mocha-cream-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the espresso (<span class="font-bold italic">Button 4</span>).
-                                <ul data-block-id="hot-mocha-cream-ul-2">
-                                    <li>Regular - <span class="font-bold italic">2 shots + 1 scoop</span> of chocolate</li>
-                                    <li>Grande - <span class="font-bold italic">2 shots + 1 heaped scoop</span> of chocolate</li>
-                                </ul>
-                            </li>
-                            <li>Mix the chocolate powder and the coffee with a <span class="font-bold italic">whisk</span>.</li>
-                            <li>Steam the milk <span class="font-bold italic">Latte style</span>. Pour from spout and add <span class="font-bold italic">whipped cream</span>, dust with chocolate powder.</li>
-                        </ul>
-
-                        <p data-block-id="hot-mocha-nocream-p-1" class="font-semibold mt-4">MOCHA (WITHOUT CREAM)</p>
-                        <ul data-block-id="hot-mocha-nocream-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Prepare the espresso (<span class="font-bold italic">Button 4</span>).
-                                <ul data-block-id="hot-mocha-nocream-ul-2">
-                                    <li>Regular - <span class="font-bold italic">2 shots + 1 scoop</span> of chocolate</li>
-                                    <li>Grande - <span class="font-bold italic">2 shots + 1 heaped scoop</span> of chocolate</li>
-                                </ul>
-                            </li>
-                            <li>Mix the chocolate powder and the coffee with a <span class="font-bold italic">whisk</span>.</li>
-                            <li>Steam the milk <span class="font-bold italic">Cappuccino style</span>. Pour from side until you have a <span class="font-bold italic">dome</span>. Foam: <span class="font-bold italic">2–2.5cm</span>. Dust with chocolate powder.</li>
-                        </ul>
-
-                        <p data-block-id="hot-americano-p-1" class="font-semibold mt-4">AMERICANO</p>
-                        <ul data-block-id="hot-americano-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Fill the cup just over half way with <span class="font-bold italic">hot water</span>. Prepare the espresso (<span class="font-bold italic">Button 4</span>).
-                                <ul data-block-id="hot-americano-ul-2">
-                                    <li>Regular - <span class="font-bold italic">2 shots</span></li>
-                                    <li>Grande - <span class="font-bold italic">3 shots</span></li>
-                                </ul>
-                            </li>
-                            <li>Serve milk in a jug if requested. Add a dash of milk into the cup if taking away.</li>
-                            <li>Add paper sleeve to take away.</li>
-                        </ul>
-
-                        <p data-block-id="hot-hotchoc-p-1" class="font-semibold mt-4">HOT CHOCOLATE</p>
-                        <ul data-block-id="hot-hotchoc-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Put the milk in the jug and add the chocolate.
-                                <ul data-block-id="hot-hotchoc-ul-2">
-                                    <li>Regular Drink In (8oz) - <span class="font-bold italic">2 scoops</span> of chocolate</li>
-                                    <li>Regular Takeaway (10oz) - <span class="font-bold italic">2 scoops</span> of chocolate</li>
-                                    <li>Grande Drink In + Takeaway (12oz) - <span class="font-bold italic">3 scoops</span> of chocolate</li>
-                                </ul>
-                            </li>
-                            <li>Steam the chocolate and milk in <span class="font-bold italic">Latte style</span>. Pour the hot chocolate from the spout.</li>
-                            <li>Add <span class="font-bold italic">whipped cream</span> and chocolate chips if requested.</li>
-                        </ul>
-
-                        <p data-block-id="hot-tea-p-1" class="font-semibold mt-4">TEA</p>
-                        <ul data-block-id="hot-tea-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li>Put <span class="font-bold italic">1 teabag</span> into the mug, teapot or takeaway cup. Add <span class="font-bold italic">hot water</span>.</li>
-                            <li>Serve milk in a jug if requested. Add a dash of milk into the cup if taking away.</li>
-                            <li>Add paper sleeve to take away.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="nested-accordion-item" data-target="recipes-iced">
-                    <button class="accordion-header w-full flex justify-between items-center p-3 font-semibold text-base transition duration-200 nested-accordion-header" data-target="recipes-iced">
-                        <span class="font-bold">Iced Drinks</span>
-                        <svg class="h-5 w-5 transform transition-transform text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div id="recipes-iced" class="accordion-content p-3 hidden space-y-3 bg-white">
-
-                        <p data-block-id="iced-latte-p-1" class="font-semibold mt-2">ICED LATTES</p>
-                        <ul data-block-id="iced-latte-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>, leave to cool until served.</li>
-                            <li><span class="font-bold italic">Milk:</span> Fill to <span class="font-bold italic">line 2</span> in the measuring beaker.</li>
-                            <li><span class="font-bold italic">Flavored:</span> If flavored, add <span class="font-bold italic">2 pumps of FLAVOUR syrup</span>. Swirl to blend.</li>
-                            <li><span class="font-bold italic">2. Serve:</span> Fill serving cup with <span class="font-bold italic">ice</span>. Pour milk into cup. Top with extracted espresso.</li>
-                            <li data-block-id="iced-latte-li-1" class="pl-4 pt-1"><span class="font-bold italic">Recipe Variations:</span> Pistachio (Salted Caramel & Pistachio Syrup), Caramel (Caramel Syrup), Vanilla (Vanilla Syrup).</li>
-                        </ul>
-
-                        <p data-block-id="iced-americano-p-1" class="font-semibold mt-4">ICED AMERICANO</p>
-                        <ul data-block-id="iced-americano-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>, leave to cool until served.</li>
-                            <li><span class="font-bold italic">Water:</span> Use water line <span class="font-bold italic">4 (from iced water jug)</span>. Pour into serving cup.</li>
-                            <li><span class="font-bold italic">2. Serve:</span> Fill serving cup with <span class="font-bold italic">ice</span>. Pour espresso into serving cup. Dash of milk if requested.</li>
-                        </ul>
-
-                        <p data-block-id="iced-velvet-p-1" class="font-semibold mt-4">ICED VELVET AMERICANO</p>
-                        <ul data-block-id="iced-velvet-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>. Pour directly into measuring beaker.</li>
-                            <li><span class="font-bold italic">Water:</span> Water (from iced water jug) <span class="font-bold italic">line 2</span>.</li>
-                            <li><span class="font-bold italic">Ice:</span> <span class="font-bold italic">4 ice cubes</span>.</li>
-                            <li><span class="font-bold italic">Red Jug:</span> Pour prepared mix into <span class="font-bold italic">RED jug</span>.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add <span class="font-bold italic">2 pumps of FLAVOUR syrup</span>. Use <span class="font-bold italic">Program 3</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Fill serving cup with <span class="font-bold italic">ice</span>. Pour jug into cup. Dash of milk if requested.</li>
-                        </ul>
-
-                        <p data-block-id="iced-flatwhite-p-1" class="font-semibold mt-4">ICED FLAT WHITE</p>
-                        <ul data-block-id="iced-flatwhite-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>, leave to cool until blend.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add **4 ice cubes** and **extracted espresso** into the <span class="font-bold italic">RED jug</span>. Blend using <span class="font-bold italic">Program 3</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Add <span class="font-bold italic">whole milk line 2</span> (using measuring beaker) and **4 ice cubes** into the serving cup. Pour in the **foamed espresso from the blender**.</li>
-                            <li><span class="font-bold italic">Finish:</span> Serve with black straw, napkin and flat lid.</li>
-                        </ul>
-
-                        <p data-block-id="iced-cappuccino-p-1" class="font-semibold mt-4">ICED CAPPUCCINO</p>
-                        <ul data-block-id="iced-cappuccino-ul-1" class="list-disc list-inside ml-4 space-y-1">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>, leave to cool until serve.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Combine **skimmed milk line 2**, **Ice line 4**, and pour into the <span class="font-bold italic">RED blender jug</span>. Blend using <span class="font-bold italic">Program 3</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Add **4 ice cubes** into the serving cup, then the **extracted espresso**. Pour in the **foamed milk from the blender**.</li>
-                            <li><span class="font-bold italic">Finish:</span> Offer a **dusting of chocolate powder**. Serve with black straw, napkin and flat lid.</li>
-                        </ul>
-
-                        <h3 data-block-id="h3-iced-frappe-1" class="font-bold text-lg border-b border-black pb-1 pt-4">Standard Frappes</h3>
-
-                        <p data-block-id="frappe-latte-p-1" class="font-semibold mt-2 border-b border-black pb-1">FRAPPE LATTE</p>
-                        <ul data-block-id="frappe-latte-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span>. Pour directly into beaker.</li>
-                            <li><span class="font-bold italic">Mix:</span> Add <span class="font-bold italic">Milk line 4</span> and <span class="font-bold italic">Ice line 7</span>. Pour into blender jug.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add **2 flat BLUE scoops of frappe powder** and **extracted espresso**. Blend using <span class="font-bold italic">Program 1</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Pour into serving cup. Offer any extra jug contents to customer in small TA cup.</li>
-                            <li><span class="font-bold italic">Finish:</span> Option to upsell <span class="font-bold italic">whipped cream</span>. Serve with white straw, napkin and flat lid (use dome lid if cream upsold).</li>
-                        </ul>
-
-                        <p data-block-id="frappe-mocha-p-1" class="font-semibold mt-4 border-b border-black pb-1">FRAPPE MOCHA</p>
-                        <ul data-block-id="frappe-mocha-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract <span class="font-bold italic">2 shots of espresso (button 2)</span> and leave to cool until blend.</li>
-                            <li><span class="font-bold italic">Mix:</span> Add <span class="font-bold italic">Luxury chocolate to line 1</span>, <span class="font-bold italic">Milk line 2</span>, and <span class="font-bold italic">Ice line 7</span>. Pour into blender jug.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add **2 flat BLUE scoops of frappe powder** and **extracted espresso**. Blend using <span class="font-bold italic">Program 1</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Pour into serving cup. Offer any extra jug contents to customer in small TA cup.</li>
-                            <li><span class="font-bold italic">Finish:</span> Option to upsell <span class="font-bold italic">whipped cream</span>. Serve with white straw, napkin and flat lid (use dome lid if cream upsold).</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="nested-accordion-item" data-target="recipes-luxury">
-                    <button class="accordion-header w-full flex justify-between items-center p-3 font-semibold text-base transition duration-200 nested-accordion-header" data-target="recipes-luxury">
-                        <span class="font-bold">Luxury Drinks</span>
-                        <svg class="h-5 w-5 transform transition-transform text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div id="recipes-luxury" class="accordion-content p-3 hidden space-y-3 bg-white">
-
-                        <p data-block-id="lux-hotchoc-p-1" class="font-semibold mt-2 border-b border-black pb-1">LUXURY HOT CHOCOLATE</p>
-                        <ul data-block-id="lux-hotchoc-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li>Pour the <span class="font-bold italic">Luxury Chocolate into jug</span>.</li>
-                            <li>Pour into Latte glass or regular Takeaway cup.</li>
-                            <li>Add **whipped cream** if requested and **chocolate chips**.</li>
-                            <li><span class="font-bold italic">Note:</span> Heat to **60 degrees** (as per milk steaming guidance).</li>
-                        </ul>
-
-                        <p data-block-id="lux-mocha-p-1" class="font-semibold mt-4 border-b border-black pb-1">LUXURY MOCHA</p>
-                        <ul data-block-id="lux-mocha-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li>Prepare the <span class="font-bold italic">Espresso Ristretto (Button 2 and 15 seconds)</span>. Add to Latte glass.</li>
-                            <li>Add <span class="font-bold italic">Luxury Chocolate to line 2</span> in the measuring beaker. Pour the Luxury Chocolate into a milk jug.</li>
-                            <li>Steam the milk, **heat to 60 degrees**.</li>
-                            <li>Pour into Latte glass or regular Takeaway cup.</li>
-                            <li>Add **whipped cream** if requested and **chocolate powder**.</li>
-                        </ul>
-
-                        <p data-block-id="lux-white-mocha-p-1" class="font-semibold mt-4 border-b border-black pb-1">WHITE CHOCOLATE MOCHA</p>
-                        <ul data-block-id="lux-white-mocha-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">Grande Size Only:</span> Prepare the **Espresso (Button 4)** and add **2 pumps white chocolate sauce**.</li>
-                            <li>Mix the sauce and coffee using a **whisk**.</li>
-                            <li><span class="font-bold italic">With Cream:</span> Steam the milk <span class="font-bold italic">Latte style</span>. Pour from the spout, add **whipped cream** and **chocolate powder**.</li>
-                            <li><span class="font-bold italic">Without Cream:</span> Steam the milk <span class="font-bold italic">Cappuccino style</span>. Pour the milk from the side until you get a **dome** dust with **chocolate powder**.</li>
-                        </ul>
-
-                        <p data-block-id="lux-caramel-latte-p-1" class="font-semibold mt-4 border-b border-black pb-1">LUXURY CARAMEL LATTE</p>
-                        <ul data-block-id="lux-caramel-latte-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">Grande Size Only:</span> Prepare the **Espresso**.</li>
-                            <li>Add **3 pumps of vanilla syrup**.</li>
-                            <li>Steam the milk <span class="font-bold italic">Latte style</span>. Pour from the spout of the jug.</li>
-                            <li>Add **whipped cream** on top and a **drizzle of caramel sauce**.</li>
-                        </ul>
-
-                        <p data-block-id="lux-chai-latte-p-1" class="font-semibold mt-4 border-b border-black pb-1">CHAI LATTE</p>
-                        <ul data-block-id="lux-chai-latte-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">Grande Size Only:</span> Steam the milk <span class="font-bold italic">Latte style</span>.</li>
-                            <li>Add **30ml of chai powder** to a small amount of **hot water**. Mix together to create a **paste**.</li>
-                            <li>Add a **dash of milk** and mix again.</li>
-                            <li>Pour the rest of the milk from the spout and **dust with cinnamon**. Foam: <span class="font-bold italic">1–1.5cm</span>.</li>
-                        </ul>
-
-                        <h3 data-block-id="h3-lux-frappe-1" class="font-bold text-lg border-b border-black pb-1 pt-4">Luxury Frappes</h3>
-
-                        <p data-block-id="lux-caramel-frappe-p-1" class="font-semibold mt-2 border-b border-black pb-1">ESPRESSO CARAMEL FRAPPE</p>
-                        <ul data-block-id="lux-caramel-frappe-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">1. Prepare:</span> Extract **2 shots of espresso (button 2)**, leave to cool until serve. Add **Whole milk line 2** and **Ice line 8**. Pour into blender jug.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add **4 pumps frappe syrup** and **3 pumps caramel sauce**. Blend using <span class="font-bold italic">Program 1</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Pour jug into serving cup (leave room for espresso). Add **extracted espresso**, **add cream**, and **3 swirls caramel drizzle**.</li>
-                            <li><span class="font-bold italic">Finish:</span> Serve with white straw, napkin and dome lid.</li>
-                        </ul>
-
-                        <p data-block-id="lux-millionaires-frappe-p-1" class="font-semibold mt-4 border-b border-black pb-1">MILLIONAIRES FRAPPE</p>
-                        <ul data-block-id="lux-millionaires-frappe-ul-1" class="list-disc list-inside ml-4 space-y-1 pt-2">
-                            <li><span class="font-bold italic">1. Prepare:</span> If upsold: Extract **2 shots espresso (button 2)**, leave to cool until serve. Add **Whole milk line 2** and **Ice line 8**. Pour into blender jug.</li>
-                            <li><span class="font-bold italic">2. Blend:</span> Add **4 pumps frappe syrup** and **3 pumps caramel sauce**. Blend using <span class="font-bold italic">Program 1</span>.</li>
-                            <li><span class="font-bold italic">3. Serve:</span> Add **Luxury Chocolate line 1** in TA serving cup (drink in - use measuring beaker). Pour jug into cup (leave room for espresso if ordered). Add extracted espresso if requested, **add chocolate cream**, and **3 swirls caramel drizzle**.</li>
-                            <li><span class="font-bold italic">Finish:</span> Serve with white straw, napkin and dome lid. **Option to upsell espresso.**</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        
-        <div class="accordion-item overflow-hidden" data-target="content-10">
-            <button class="accordion-header w-full flex justify-between items-center p-4 font-semibold text-lg transition duration-200" data-target="content-10">
-                <span>10. MILK GUIDE</span>
-                <svg class="h-6 w-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            <div id="content-10" class="accordion-content p-4 hidden space-y-4 text-sm">
-                <h2 data-block-id="h2-10-1" class="font-bold text-xl mb-2">10. MILK GUIDE & ALLERGY PROTOCOL</h2>
-                
-                <h3 data-block-id="h3-10-2" class="font-bold text-lg border-b border-black pb-1 pt-2">Allergy & Intolerance Safety Protocol</h3>
-                <p data-block-id="p-10-3" class="font-bold">
-                    Whenever a customer requests an alternative milk, you <span class="font-bold italic">must</span> ask if this is due to an allergy/intolerance or simply a preference.
-                </p>
-                <div data-block-id="div-10-4" class="border border-red-500 bg-red-100 p-3 rounded-md">
-                    <p class="text-sm font-semibold text-black">
-                        If the customer states it is due to an allergy or intolerance, you must advise them that due to the use of shared equipment such as <span class="font-extrabold">steam wands, blenders, and bench space</span>, we cannot guarantee an allergen-free environment, despite our cleaning and sanitisation procedures. There is always a risk of cross-contamination.
-                    </p>
-                </div>
-
-                <h3 data-block-id="h3-10-5" class="font-bold text-lg border-b border-black pb-1 pt-2">Milk Types & Target Temperatures</h3>
-                <p data-block-id="p-10-6">
-                    We use **Whole, Semi-Skimmed, and Skimmed Dairy Milk**, alongside **Alpro Barista** alternatives (Oat, Soya, Coconut, and Almond). We also use a **Vegan Suitable Hot Chocolate Powder** and a **Soya-Based Luxury Chocolate Base**.
-                </p>
-                <ul data-block-id="ul-10-7" class="list-disc list-inside ml-4 space-y-1">
-                    <li><span class="font-bold italic">Dairy Milk (Whole, Semi-Skimmed, Skimmed):</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
-                    <li><span class="font-bold italic">Milk Alternatives (Oat, Soya, Coconut, Almond):</span> Target Temperature is <span class="font-bold italic">50&deg;C</span> (lower heat prevents curdling/flavor change).</li>
-                    <li><span class="font-bold italic">Luxury Chocolate Base:</span> Target Temperature is <span class="font-bold italic">60&deg;C</span>.</li>
-                </ul>
-
-                <h3 data-block-id="h3-10-8" class="font-bold text-lg border-b border-black pb-1 pt-2">Color-Coded Jug & Cross-Contamination Guide</h3>
-                <p data-block-id="p-10-9">
-                    To prevent cross-contamination and ensure quality, dedicated, color-coded jugs must be used for each product.
-                </p>
-                <ul data-block-id="ul-10-10" class="list-none ml-4 space-y-2">
-                    <li data-block-id="li-10-10-1" class="p-2 color-silver rounded-md"><span class="font-bold">Silver Jug (No Tags):</span> Dairy Milks (Whole, Semi, Skimmed).</li>
-                    <li data-block-id="li-10-10-2" class="p-2 color-purple rounded-md"><span class="font-bold">Purple Tag Jug:</span> Oat Milk.</li>
-                    <li data-block-id="li-10-10-3" class="p-2 color-yellow rounded-md"><span class="font-bold">Yellow Tag Jug:</span> Soya Milk.</li>
-                    <li data-block-id="li-10-10-4" class="p-2 color-white rounded-md"><span class="font-bold">White Tag Jug:</span> Coconut Milk.</li>
-                    <li data-block-id="li-10-10-5" class="p-2 color-pink rounded-md"><span class="font-bold">Pink Tag Jug:</span> Almond Milk.</li>
-                    <li data-block-id="li-10-10-6" class="p-2 color-brown rounded-md"><span class="font-bold">Brown Tag Jug:</span> Hot Chocolate Powder (when used with dairy milk).</li>
-                    <li data-block-id="li-10-10-7" class="p-2 color-black rounded-md"><span class="font-bold">Black Tag Jug:</span> Luxury Chocolate Base.</li>
-                </ul>
-                <p data-block-id="p-10-11" class="pt-2 italic">
-                    **Hot Chocolate Rule:** When making a Hot Chocolate with alternative milk (e.g., Oat Hot Chocolate), use the **appropriate color-coded jug** for that alternative milk. Rinse the jug thoroughly immediately after use. Our Hot Chocolate Powder is Vegan Suitable.
-                </p>
-
-                <h3 data-block-id="h3-10-12" class="font-bold text-lg border-b border-black pb-1 pt-2">Specific Steaming Techniques & Tips</h3>
-                <div data-block-id="div-10-13" class="space-y-3 pt-2">
-                    <p data-block-id="p-10-14" class="font-bold">Dairy Milks (60&deg;C Target):</p>
-                    <ul data-block-id="ul-10-15" class="list-disc list-inside ml-6 space-y-1">
-                        <li><span class="font-bold italic">Whole / Semi-Skimmed:</span> These foam well. Focus on a strong **vortex** after initial air injection (chirping) to create a glossy, stable microfoam (the 'wet paint' consistency).</li>
-                        <li><span class="font-bold italic">Skimmed:</span> Foams quickly but the foam is generally lighter and less stable. Inject air for a **shorter duration** and focus heavily on creating a smooth **vortex** for texture refinement.</li>
-                    </ul>
-
-                    <p data-block-id="p-10-16" class="font-bold pt-2">Milk Alternatives (50&deg;C Target):</p>
-                    <ul data-block-id="ul-10-17" class="list-disc list-inside ml-6 space-y-1">
-                        <li><span class="font-bold italic">Oat (Alpro Barista):</span> The most forgiving alternative, producing a rich microfoam similar to dairy. **Monitor the temperature closely**, as it can heat rapidly.</li>
-                        <li><span class="font-bold italic">Soya (Alpro Barista):</span> Very temperature-sensitive; it **curdles easily** above 55&deg;C. Use **minimum air injection** and stop heating immediately at 50&deg;C to avoid 'burnt' or sour notes.</li>
-                        <li><span class="font-bold italic">Coconut / Almond (Alpro Barista):</span> These milks have a thinner consistency. Use **minimal air injection**. The resulting foam is light and dissipates quickly, so **serve immediately** for the best result.</li>
-                    </ul>
-
-                    <p data-block-id="p-10-18" class="font-bold pt-2">Luxury Chocolate Base (60&deg;C Target):</p>
-                    <ul data-block-id="ul-10-19" class="list-disc list-inside ml-6 space-y-1">
-                        <li><span class="font-bold italic">Steaming & Noise:</span> Inject a **small amount of air** at the start to ensure mixing, then fully submerge the wand. Due to the thick consistency, steaming will be **significantly louder** than milks.</li>
-                        <li><span class="font-bold italic">Heating:</span> Submerge the steam wand to fully heat and mix the base until it reaches **60&deg;C**.</li>
-                    </ul>
-                </div>
-                
-                <h3 data-block-id="h3-10-20" class="font-bold text-lg border-b border-black pb-1 pt-2">General Quality & Storage Rules</h3>
-                <ul data-block-id="ul-10-21" class="list-disc list-inside ml-4 space-y-1">
-                    <li>Do not steam milk more than <span class="font-bold italic">once</span>; discard any leftover milk from the jug after use.</li>
-                    <li>Always follow <span class="font-bold italic">FIFO (First In First Out)</span> when stocking and using open milk cartons.</li>
-                    <li>Always store milk below <span class="font-bold italic">4&deg;C (40&deg;F)</span>.</li>
-                    <li><span class="font-bold italic">Allergy Cleaning Protocol:</span> Use a **sanitising probe wipe** to thoroughly clean the steam wand **before** and **after** use with alternative milks to minimize cross-contamination risk.</li>
-                    <li>Remember the <span class="font-bold italic">Golden Rule</span>: Purge and wipe the steam wand immediately after every use, especially when switching between milk types.</li>
-                </ul>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mainContent = document.getElementById('knowledge-hub');
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            const searchInput = document.getElementById('search-input');
-            const searchResults = document.getElementById('search-results');
-            const allItems = mainContent.querySelectorAll('.accordion-item');
-            
-            // --- Accordion Functionality (Retained for manual clicks) ---
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', (event) => {
-                    const targetId = header.getAttribute('data-target');
-                    const content = document.getElementById(targetId);
-                    const isNested = header.classList.contains('nested-accordion-header');
-
-                    // FIX: Stop propagation for nested headers to prevent the main accordion item from closing
-                    if (isNested) {
-                        event.stopPropagation();
-                    }
-
-                    if (content) {
-                        const isCurrentlyOpen = !content.classList.contains('hidden');
-
-                        // Close all sibling top-level sections
-                        if (!isNested) {
-                            document.querySelectorAll('.accordion-content').forEach(c => {
-                                // Only target top-level content divs
-                                if (c.parentElement.classList.contains('accordion-item') && c.id !== targetId) {
-                                    c.classList.add('hidden');
-                                    c.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
-                                }
-                            });
-                        } else {
-                            // If it's a nested section, close other nested sections within the same parent
-                            const parentContent = header.closest('.accordion-content');
-                            if (parentContent) {
-                                parentContent.querySelectorAll('.accordion-content').forEach(c => {
-                                    // Check if the content belongs to a nested item within the same top-level parent
-                                    if (c.id !== targetId && c.closest('.nested-accordion-item')) {
-                                        c.classList.add('hidden');
-                                        c.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
-                                    }
-                                });
-                            }
-                        }
-
-                        // Toggle the clicked section
-                        if (isCurrentlyOpen) {
-                            content.classList.add('hidden');
-                            header.querySelector('svg').classList.remove('rotate-180');
-                        } else {
-                            content.classList.remove('hidden');
-                            header.querySelector('svg').classList.add('rotate-180');
-
-                            // SCROLL LOGIC
-                            let itemToScroll;
-                            if (!isNested) {
-                                // Scroll the top-level accordion-item
-                                itemToScroll = header.closest('.accordion-item');
-                            } else {
-                                // Scroll the nested-accordion-item
-                                itemToScroll = header.closest('.nested-accordion-item');
-                            }
-
-                            if (itemToScroll) {
-                                // Use scrollIntoView to smoothly bring the section to the top of the viewport
-                                itemToScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }
-                    }
-                });
-            });
-
-
-            // --- Search Functionality (Previews) ---
-            
-            // Function to get the header text from a nested item (for better context in preview)
-            function getNestedHeaderTitle(nestedItem) {
-                const parentItem = nestedItem.closest('.accordion-item');
-                const parentTitle = parentItem ? parentItem.querySelector('.accordion-header span').textContent : '';
-                const nestedTitle = nestedItem.querySelector('.nested-accordion-header span').textContent;
-                return `${parentTitle} > ${nestedTitle}`;
-            }
-
-            // Function to get the block's most relevant sub-heading
-            function getBlockSubTitle(block, nestedItem = null) {
-                let current = block;
-                let foundTitle = '';
-
-                // Search upwards for the nearest preceding H3/P with font-semibold
-                // We limit the search to the immediate parent accordion content div
-                const contentBoundary = current.closest('.accordion-content');
-                
-                while (current && current !== contentBoundary) {
-                    if (current.previousElementSibling) {
-                        const prev = current.previousElementSibling;
-                        // Check for H3 or a P with the font-semibold class (used for recipe titles)
-                        if (prev.tagName === 'H3' || (prev.tagName === 'P' && prev.classList.contains('font-semibold'))) {
-                            foundTitle = prev.textContent.trim().substring(0, 100);
-                            return foundTitle;
-                        }
-                    }
-                    // Move up to the parent element for the next iteration
-                    current = current.parentElement; 
-                }
-
-                // If the block itself is a heading, use its content
-                if (block.tagName === 'H3' || block.tagName === 'H2' || block.classList.contains('font-semibold')) {
-                    return block.textContent.trim().substring(0, 100);
-                }
-                
-                // Fallback: If all else fails, grab a snippet from the content block's text
-                return block.textContent.trim().substring(0, 50) + '...';
-            }
-
-            // Function to generate a clickable HTML preview snippet
-            function generatePreview(item, query, isNested = false) {
-                // Determine the root element containing the searchable content blocks
-                let searchableContainer = isNested ? item.querySelector('.accordion-content') : item.querySelector('.accordion-content');
-                
-                // If it's a top-level item, but not the actual content (like the entire div), check its immediate content
-                if (!isNested && !searchableContainer) {
-                    searchableContainer = item;
-                }
-                
-                if (!searchableContainer) return '';
-
-                // Find all distinct content blocks with data-block-id inside the searchable container
-                const contentBlocks = searchableContainer.querySelectorAll('[data-block-id]');
-                
-                let resultsHtml = '';
-                
-                // Determine the main parent for context and navigation
-                const mainParentItem = item.closest('.accordion-item') || item;
-                const mainParentTitle = mainParentItem.querySelector('.accordion-header span').textContent;
-                const mainParentId = mainParentItem.getAttribute('data-target');
-
-                contentBlocks.forEach(block => {
-                    const blockId = block.getAttribute('data-block-id');
-                    const textContent = block.textContent;
-                    
-                    // FIX: Construct the regex correctly for a dynamic, case-insensitive, global search
-                    // Escaping the query is generally good practice for user input, though simple words rarely need it.
-                    const escapedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                    const regex = new RegExp(`(.{0,40})(${escapedQuery})(.{0,40})`, 'gi');
-                    
-                    let match;
-                    let matches = 0;
-                    let previewText = '';
-
-                    // Find first match for context (exec automatically starts searching from the beginning)
-                    if ((match = regex.exec(textContent)) !== null) {
-                        const before = match[1].trim();
-                        const found = match[2];
-                        const after = match[3].trim();
-                        
-                        // Highlight the match visually using inline Tailwind classes
-                        const highlighted = `<span class="bg-yellow-300 font-bold text-black">${found}</span>`;
-                        // Reconstruct the preview text, trimming leading/trailing text and adding ellipses
-                        previewText = `${before.length > 0 ? '...' : ''}${before} ${highlighted} ${after}${after.length > 0 ? '...' : ''}`;
-                        
-                        // Count all matches in the block (need to create a new regex instance for global counting)
-                        matches = (textContent.match(new RegExp(escapedQuery, 'gi')) || []).length;
-                        
-                        // Determine context titles
-                        const fullContextTitle = isNested ? getNestedHeaderTitle(item) : mainParentTitle;
-                        const subContextTitle = getBlockSubTitle(block, isNested ? item : null);
-                        
-                        resultsHtml += `
-                            <div class="search-preview p-4 rounded-lg cursor-pointer transition duration-150 ease-in-out border border-black hover:bg-gray-100" 
-                                 data-target-id="${isNested ? item.getAttribute('data-target') : mainParentId}"
-                                 data-main-header-id="${mainParentId}"
-                                 data-block-id="${blockId}"
-                                 data-is-nested="${isNested}">
-                                <p class="text-xs font-semibold uppercase opacity-70">${fullContextTitle}</p>
-                                <p class="font-bold text-sm mt-1 mb-2 truncate">${subContextTitle}</p>
-                                <p class="text-xs italic">${previewText} <span class="font-semibold text-gray-600">(${matches} ${matches > 1 ? 'matches' : 'match'})</span></p>
-                            </div>
-                        `;
-                    }
-                });
-                
-                return resultsHtml;
-            }
-
-            // Attaches click listeners to the dynamically generated preview results
-            function addPreviewListeners() {
-                document.querySelectorAll('.search-preview').forEach(preview => {
-                    preview.addEventListener('click', () => {
-                        const targetSectionId = preview.getAttribute('data-target-id');
-                        const mainHeaderId = preview.getAttribute('data-main-header-id');
-                        const blockId = preview.getAttribute('data-block-id');
-                        const isNested = preview.getAttribute('data-is-nested') === 'true';
-
-                        let mainItem = document.querySelector(`.accordion-item[data-target="${mainHeaderId}"]`);
-
-                        // 1. Close all existing top-level sections
-                        document.querySelectorAll('.accordion-content').forEach(c => {
-                             if (c.parentElement.classList.contains('accordion-item')) {
-                                c.classList.add('hidden');
-                                c.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
-                            }
-                        });
-                        
-                        // 2. Open the primary parent item
-                        if (mainItem) {
-                            const mainContent = document.getElementById(mainHeaderId);
-                            const mainHeader = mainItem.querySelector('.accordion-header');
-                            
-                            mainContent.classList.remove('hidden');
-                            mainHeader.querySelector('svg').classList.add('rotate-180');
-                            
-                            // 3. Open the nested item if applicable (and close siblings)
-                            if (isNested) {
-                                let nestedItem = document.querySelector(`.nested-accordion-item[data-target="${targetSectionId}"]`);
-                                if (nestedItem) {
-                                    // Close other nested items within the main parent
-                                    mainContent.querySelectorAll('.nested-accordion-item').forEach(ni => {
-                                        const nc = ni.querySelector('.accordion-content');
-                                        const nh = ni.querySelector('.accordion-header');
-                                        if(nc && nh) {
-                                            nc.classList.add('hidden');
-                                            nh.querySelector('svg').classList.remove('rotate-180');
-                                        }
-                                    });
-                                    
-                                    const nestedContent = document.getElementById(targetSectionId);
-                                    const nestedHeader = nestedItem.querySelector('.accordion-header');
-                                    
-                                    nestedContent.classList.remove('hidden');
-                                    nestedHeader.querySelector('svg').classList.add('rotate-180');
-                                }
-                            }
-                        }
-
-                        // 4. Scroll the specific content block into view
-                        if (blockId) {
-                            const targetBlock = document.querySelector(`[data-block-id="${blockId}"]`);
-                            if (targetBlock) {
-                                // Scroll the element itself to the top of the viewport, with a slight offset
-                                const headerHeight = document.querySelector('header').offsetHeight;
-                                const searchBarHeight = document.getElementById('search-input').offsetHeight + 24; // Padded search bar
-                                const offset = headerHeight + searchBarHeight + 20; // Additional padding
-                                
-                                const elementPosition = targetBlock.getBoundingClientRect().top + window.scrollY;
-                                const offsetPosition = elementPosition - offset;
-
-                                window.scrollTo({
-                                    top: offsetPosition,
-                                    behavior: 'smooth'
-                                });
-                                
-                                // Optional: Flash the block briefly for visual confirmation
-                                targetBlock.style.transition = 'background-color 0.5s ease-out';
-                                targetBlock.style.backgroundColor = 'rgba(255, 255, 0, 0.2)'; // Light yellow flash
-                                setTimeout(() => {
-                                    targetBlock.style.backgroundColor = '';
-                                }, 1000);
-                            }
-                        }
-
-                        // 5. Clear search bar and results for clean view
-                        searchInput.value = '';
-                        searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">Start typing to search the hub.</p>`;
-                    });
-                });
-            }
-
-            // --- Main Search Handler ---
-            searchInput.addEventListener('input', (event) => {
-                const query = event.target.value.toLowerCase().trim();
-                searchResults.innerHTML = '';
-                
-                if (query.length < 3) {
-                    searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">${query.length > 0 ? 'Keep typing for results...' : 'Start typing to search the hub.'}</p>`;
-                    return;
-                }
-
-                let resultsHtml = '';
-
-                allItems.forEach(item => {
-                    const contentTarget = item.getAttribute('data-target');
-                    
-                    // 1. Check top-level content
-                    resultsHtml += generatePreview(item, query, false);
-
-                    // 2. Check nested content (only if it's the recipes section)
-                    if (contentTarget === 'content-9') {
-                        item.querySelectorAll('.nested-accordion-item').forEach(nestedItem => {
-                            resultsHtml += generatePreview(nestedItem, query, true);
-                        });
-                    }
-                });
-                
-                // Inject results or a "no results" message
-                if (resultsHtml) {
-                    // Inject a results title
-                    searchResults.innerHTML = `
-                        <h2 class="text-xl font-bold border-b border-black pb-2 mb-3 mt-1">Search Results</h2>
-                        <div class="space-y-3">${resultsHtml}</div>
-                    `;
-                    addPreviewListeners(); // Attach click listeners to new results
-                } else {
-                    searchResults.innerHTML = `<p class="text-center text-sm text-gray-500 p-4">No matches found for "${query}".</p>`;
-                }
-            });
-        });
-    </script>
-</body>
-</html>
-
+                            <li data-block-id="hot-panna-li-1-1">Prepare a <span class="font-bold italic">Double Espresso
